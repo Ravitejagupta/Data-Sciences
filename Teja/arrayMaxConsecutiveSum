@@ -1,0 +1,17 @@
+'''import copy
+
+def arrayMaxConsecutiveSum(inputArray, k):
+    res = []
+    for i in range(len(inputArray)-k+1):
+        res.append(sum(inputArray[i:i+k]))
+    return(max(res))'''
+
+
+def arrayMaxConsecutiveSum(inputArray, k):
+    cur = sum(inputArray[:k])
+    largest = cur
+    for i in range(k, len(inputArray)):
+        first = inputArray[i - k]
+        cur = cur - first + inputArray[i]
+        largest = max(largest, cur)
+    return largest
