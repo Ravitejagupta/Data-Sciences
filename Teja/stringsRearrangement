@@ -1,0 +1,26 @@
+def stringsRearrangement(inputArray):
+    for i in range(len(inputArray)):
+        if backtrack(inputArray[:i] + inputArray[i+1:], inputArray[i], 1, len(inputArray)):
+            return True
+    return False
+        
+def backtrack(arr, s, length, target):
+    if length == target:
+        return True
+    for i in range(len(arr)):
+        if isNeighbor(s, arr[i]):
+            if backtrack(arr[:i] + arr[i+1:], arr[i], length + 1, target):
+                return True
+    return False
+
+def isNeighbor(s1, s2):
+    dif = False
+    if len(s1) != len(s2):
+        return False
+    for i in range(len(s1)):
+        if s1[i] != s2[i]:
+            if dif:
+                return False
+            else:
+                dif = True
+    return dif
